@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: my-rs
+  labels:
+    app: rs-lbl
+spec:
+  replicas: 5
+  selector:
+    matchExpressions:
+      - key: app
+        operator: In
+        values: [tomcat]
+      - key: env
+        operator: NotIn
+        values: [dev, uat]
+  template:
+    metadata:
+      labels:
+        app: tomcat
+        env: qa
+    spec:
+      containers:
+        - image: tomcat:10
+          name: tomcat-cont
+          ports:
+            - containerPort: 8080
+        
