@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-tol-pod7
+  labels:
+    app: nginx
+spec:
+  tolerations:
+    - key: env
+      operator: Equal
+      value: prod
+      effect: NoSchedule
+  containers:
+    - image: nginx:latest
+      name: my-cont
+      ports:
+        - containerPort: 80
+
+
+
+
+
+  ## kubectl taint node ip-172-31-41-95 env=dev:NoSchedule
